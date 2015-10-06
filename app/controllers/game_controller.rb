@@ -37,7 +37,7 @@ class GameController
 	    end
 	    view.display_board(game.board)
 	  end
-	  view.display_game_over
+	  view.display_game_over(winner)
 	end
 
 end

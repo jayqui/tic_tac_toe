@@ -24,8 +24,12 @@ class GameDisplay
 		puts "\t\t|_#{board[0]}_|_#{board[1]}_|_#{board[2]}_|\n\t\t|_#{board[3]}_|_#{board[4]}_|_#{board[5]}_|\n\t\t|_#{board[6]}_|_#{board[7]}_|_#{board[8]}_|\n"
 	end
 
-	def display_game_over
-		puts "Game Over"
+	def display_game_over(winner = nil)
+		if winner
+			puts "Game Over! The winner is #{winner}"
+		else
+			puts "Game Over"
+		end
 	end
 
 end
