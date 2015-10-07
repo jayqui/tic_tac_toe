@@ -1,6 +1,6 @@
 ---Where to start?---
-1.  Segregeate files & methods into more of an MVC architecture, with runner file.
-2.  Rename some variables 
+X.  Segregeate files & methods into more of an MVC architecture, with runner file.
+X.  Rename some variables 
 3.  Check that the functionality is still present.
 
 

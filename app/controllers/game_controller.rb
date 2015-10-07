@@ -7,12 +7,12 @@ class GameController
 		@view = GameDisplay.new
 	end
 
-	def game_is_over
-		game.game_is_over(game.board)
+	def someone_won
+		game.someone_won
 	end
 
 	def tie
-		game.tie(game.board)
+		game.tie
 	end
 
 	def introductions
@@ -30,14 +30,15 @@ class GameController
 		introductions
 		display_and_prompt
 
-	  until game_is_over || tie
+	  until someone_won || tie
 	    game.get_human_spot
-	    if !game_is_over && !tie
+	    if !someone_won && !tie
 	      game.eval_board
 	    end
-	    view.display_board(game.board)
+	    display_and_prompt
 	  end
-	  view.display_game_over(winner)
+	  game.set_winner
+	  view.display_game_over(game.winner)
 	end
 
 end
