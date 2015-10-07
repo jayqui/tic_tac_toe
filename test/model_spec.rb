@@ -23,6 +23,20 @@ describe "Game" do
 		end
 	end
 
+	describe "#choose_best_move_or_random_move" do
+		it "should return the best move if one has been found" do
+			best_move = 5
+			available_spaces = [0,1,2,3,5,6,7,8]
+			expect(g.choose_best_move_or_random_move(best_move, available_spaces)).to eq(5)
+		end
+		it "should return a random move if a best move has not been found" do
+			srand(0)
+			best_move = nil
+			available_spaces = [0,1,2,3,5,6,7,8]
+			expect(g.choose_best_move_or_random_move(best_move, available_spaces)).to eq(6)
+		end
+	end
+
 	describe "#someone_won" do
 		it "should return false if no one has won" do
 			expect(g.someone_won).to eq(false)

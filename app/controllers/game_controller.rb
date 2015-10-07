@@ -19,6 +19,29 @@ class GameController
 		view.welcome_message
 		view.introduce_characters("O","X")
 		view.introduce_gameplay
+		solicit_player_symbols
+	end
+
+	def solicit_player_symbols
+		# get human symbol
+		view.solicit_human_symbol
+		h_candidate = gets.chomp
+		until !('0'..'8').include?(h_candidate)
+			view.error_1_8
+			view.solicit_human_symbol
+			h_candidate = gets.chomp
+		end
+		game.human_mark = h_candidate
+
+		# get computer symbol
+		view.solicit_computer_symbol
+		c_candidate = gets.chomp
+		until c_candidate != h_candidate && !('0'..'8').include?(c_candidate)
+			view.error_1_8_already_taken
+			view.solicit_computer_symbol
+			c_candidate = gets.chomp
+		end
+		game.computer_mark = c_candidate
 	end
 
 	def display_and_prompt
@@ -33,7 +56,8 @@ class GameController
 	  until someone_won || tie
 	    game.get_human_spot
 	    if !someone_won && !tie
-	      game.generate_computer_move
+	      move = game.generate_computer_move
+	      view.state_computer_move(move)
 	    end
 	    display_and_prompt
 	  end

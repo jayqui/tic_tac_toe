@@ -6,11 +6,6 @@ X.  Write some tests.
 X.  Refactor wet code.
 -.  Refactor logical methods to improve on logical glitches
 
-
-##### Logic glitch(es?) #####
-● In its current form, which is supposed to be at a difficulty level of “hard” (meaning the computer cannot be beaten), it actually can be beaten in certain situations. This is more like a “medium” difficulty level.
-
-
 ##### Sequential glitches #####
 ●  If I choose a place where the computer already has an X, it gets stuck.
 ●  If I choose a place where the I've already put an O, it gets stuck.
@@ -18,6 +13,9 @@ X.  Refactor wet code.
 ● The game skips turns on bad user input (the first time).
 ● The game gets stuck after bad user input (after the first time)---even if user input is ok on the second time.
 
+
+##### Logic glitch(es?) #####
+● In its current form, which is supposed to be at a difficulty level of “hard” (meaning the computer cannot be beaten), it actually can be beaten in certain situations. This is more like a “medium” difficulty level.
 
 ##### UX desirables #####
 ● The user messages are unclear. 
@@ -27,8 +25,8 @@ X.  Refactor wet code.
 
 
 ##### Portability desirable #####
-● Make it less linked to the console ---> MVC architecture
+X Make it less linked to the console ---> MVC architecture
 
 ##### Flexibility #####
-● Allow the user to choose how each player marks the board (traditionally it’s “X” and “O”).
+X Allow the user to choose how each player marks the board (traditionally it’s “X” and “O”).
 ● Allow user to choose which player goes first.
