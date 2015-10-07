@@ -48,14 +48,14 @@ class Game
     end
   end
 
+  def find_available_spaces
+    board.select { |s| s != "X" && s != "O"}    
+  end
+
   def get_best_move(board, next_player, depth = 0, best_score = {})
-    available_spaces = []
     best_move = nil
-    board.each do |s|
-      if s != "X" && s != "O"
-        available_spaces << s
-      end
-    end
+    available_spaces = find_available_spaces
+    
     available_spaces.each do |as|
       board[as.to_i] = @computer_mark
       if someone_won
