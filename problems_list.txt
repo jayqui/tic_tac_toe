@@ -1,4 +1,4 @@
----Where to start?---
+---To Do---
 X.  Segregeate files & methods into more of an MVC architecture, with runner file.
 X.  Rename some variables 
 X.  Check that the functionality is still present.
@@ -7,6 +7,7 @@ X.  Refactor wet code.
 -.  Refactor logical methods to improve on logical glitches
 -.  Tackle the sequential glitches.
 
+---Problems---
 ##### Sequential glitches #####
 ● The game skips turns on bad user input (the first time).
 ● The game gets stuck after bad user input (after the first time)---even if user input is ok on the second time.

@@ -47,7 +47,7 @@ describe "Game" do
 		end
 	end
 
-	describe "set_winner" do
+	describe "#set_winner" do
 		it "should set the human as the winner if the human has won" do
 			g.board = ["O", "O", "O", "3", "4", "5", "6", "7", "8"]
 			expect(g.set_winner).to eq(g.human_mark)
@@ -60,6 +60,13 @@ describe "Game" do
 			g.board = ["O", "X", "O", "X", "O", "O", "X", "O", "X"]
 			expect(g.set_winner).to eq(nil)
 		end
-
 	end
+
+	# describe "#handle_bad_mark_input" do
+	# 	it "should give the right error message if the two candidates are the same" do
+	# 		c1 = "H"
+	# 		c2 = "H"
+	# 		expect(handle_bad_mark_input(c1, c2)).to eq("")
+	# 	end
+	# end
 end

@@ -19,13 +19,29 @@ class GameDisplay
 		print "Enter the symbol you want to represent the computer: "
 	end
 
-	def error_1_8
-		puts "Can't be 1-8."
+
+	# ERROR MESSAGES
+	def error_must_be_0_8
+		puts "Must be one of 0-8."
 	end
 
-	def error_1_8_already_taken
-		puts "Can't be 1-8 or already taken."
+	def error_cant_be_0_8
+		puts "Can't be 0-8."
 	end
+
+	def error_cant_be_already_taken
+		puts "Can't be already taken."
+	end
+
+	def error_already_chosen(opts = {})
+		hash = {"human" => "You", "computer" => "The computer"}
+		puts "#{hash[opts]} already chose that spot."
+	end
+
+	def error_must_choose
+		puts "You must choose a character."
+	end
+
 
 	# DISLPAY FOR GAMEPLAY
 	def prompt_turn
