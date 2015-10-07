@@ -1,10 +1,10 @@
-**Tic Tac Toe
+## Tic Tac Toe ## 
 
 An exercise in refactoring non-ideal code.
 
 I've been given some code that was originally badly formatted.  The task is to clean it up and improve the functionality.
 
----To Do---
+###To Do###
 X.  Segregeate files & methods into more of an MVC architecture, with runner file.
 X.  Rename some variables 
 X.  Check that the functionality is still present.
@@ -13,7 +13,7 @@ X.  Refactor wet code.
 -.  Refactor logical methods to improve on logical glitches
 -.  Tackle the sequential glitches.
 
----Problems---
+###Problems###
 ##### Sequential glitches #####
 ● The game skips turns on bad user input (the first time).
 ● The game gets stuck after bad user input (after the first time)---even if user input is ok on the second time.
