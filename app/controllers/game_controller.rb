@@ -33,7 +33,7 @@ class GameController
 	  until someone_won || tie
 	    game.get_human_spot
 	    if !someone_won && !tie
-	      game.eval_board
+	      game.generate_computer_move
 	    end
 	    display_and_prompt
 	  end
