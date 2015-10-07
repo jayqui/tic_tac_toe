@@ -62,11 +62,4 @@ describe "Game" do
 		end
 	end
 
-	# describe "#handle_bad_mark_input" do
-	# 	it "should give the right error message if the two candidates are the same" do
-	# 		c1 = "H"
-	# 		c2 = "H"
-	# 		expect(handle_bad_mark_input(c1, c2)).to eq("")
-	# 	end
-	# end
 end

@@ -6,16 +6,14 @@
 - DONE  Check that the functionality is still present.
 - DONE  Write some tests.
 - DONE  Refactor wet code.
+- DONE  Tackle the sequential glitches.
 -  Refactor logical methods to improve on logical glitches
--  Tackle the sequential glitches.
 
 ###Problems###
-##### Sequential glitches #####
-- DONE The game skips turns on bad user input (the first time).
-- DONE The game gets stuck after bad user input (after the first time)---even if user input is ok on the second time.
-- DONE If I choose a place where the computer already has an X, it gets stuck.
-- DONE If I choose a place where the I've already put an O, it gets stuck.
 
+##### Flexibility #####
+- Allow user to choose which player goes first.
+- DONE Allow the user to choose how each player marks the board (traditionally it’s “X” and “O”).
 
 ##### Logic glitch(es?) #####
 - In its current form, which is supposed to be at a difficulty level of “hard” (meaning the computer cannot be beaten), it actually can be beaten in certain situations. This is more like a “medium” difficulty level.
@@ -24,12 +22,13 @@
 - The user messages are unclear. 
 - It’s confusing to see the spot that’s selected and the board all on the screen. 
 - It’s easy to get lost in what’s happening. 
-- It’s weird the way the computer picks its spot without notifying the user.
+- DONE  It’s weird the way the computer picks its spot without notifying the user.
 
+##### Sequential glitches #####
+- DONE The game skips turns on bad user input (the first time).
+- DONE The game gets stuck after bad user input (after the first time)---even if user input is ok on the second time.
+- DONE If I choose a place where the computer already has an X, it gets stuck.
+- DONE If I choose a place where the I've already put an O, it gets stuck.
 
 ##### Portability desirable #####
-- X Make it less linked to the console ---> MVC architecture
-
-##### Flexibility #####
-- X Allow the user to choose how each player marks the board (traditionally it’s “X” and “O”).
-- Allow user to choose which player goes first.
+- DONE Make it less linked to the console ---> MVC architecture
