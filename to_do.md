@@ -19,9 +19,9 @@
 - In its current form, which is supposed to be at a difficulty level of “hard” (meaning the computer cannot be beaten), it actually can be beaten in certain situations. This is more like a “medium” difficulty level.
 
 ##### UX desirables #####
-- The user messages are unclear. 
-- It’s confusing to see the spot that’s selected and the board all on the screen. 
-- It’s easy to get lost in what’s happening. 
+- DONE? The user messages are unclear. 
+- DONE? It’s confusing to see the spot that’s selected and the board all on the screen.
+- DONE? It’s easy to get lost in what’s happening. 
 - DONE  It’s weird the way the computer picks its spot without notifying the user.
 
 ##### Sequential glitches #####

@@ -8,25 +8,11 @@ class GameController
 	end
 
 	### controller shorthand methods ###
-	def someone_won
-		game.someone_won
-	end
-
-	def tie
-		game.tie
-	end
-
-	def board
-		game.board
-	end
-
-	def computer_mark
-		game.computer_mark
-	end
-
-	def human_mark
-		game.human_mark
-	end
+	def someone_won		; game.someone_won	; end
+	def tie						; game.tie					; end
+	def board 				; game.board				; end
+	def computer_mark	; game.computer_mark; end
+	def human_mark		; game.human_mark		; end
 
 	### GAME-INITIALIZING BUSINESS ###
 	def introductions
@@ -56,7 +42,7 @@ class GameController
 		end
 		game.computer_mark = c_candidate
 	end
-	
+
 	def solicit_player_symbols
 		h = get_human_symbol
 		get_computer_symbol(h)
@@ -64,11 +50,12 @@ class GameController
 
 	### ERROR HANDLING ###
 	def acceptable_mark?(candidate_mark)
-		not_0_thru_8(candidate_mark) && candidate_mark.length >= 1
+		not_0_thru_8(candidate_mark) && candidate_mark.length == 1
 	end
 	
 	def handle_bad_mark_input(candidate, second_candidate = nil)
   	view.error_must_choose if candidate.length < 1
+  	view.error_must_be_1_char if candidate.length > 1
 		view.error_cant_be_0_8 if !not_0_thru_8(candidate)
 		view.error_cant_be_already_taken if second_candidate == candidate
 	end
@@ -108,7 +95,7 @@ class GameController
 	end
 
 	def display_and_prompt
-		view.display_board(game.board)
+		view.display_board(game.board, human_mark, computer_mark)
 		view.prompt_turn
 	end
 
@@ -125,7 +112,7 @@ class GameController
 	    end
 	  end
 	  game.set_winner
-		view.display_board(game.board)
+		view.display_board(game.board, human_mark, computer_mark)
 	  view.display_game_over(game.winner)
 	end
 
