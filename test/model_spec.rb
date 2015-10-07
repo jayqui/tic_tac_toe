@@ -3,23 +3,45 @@ require_relative "../app/models/game"
 
 describe "Game" do
 	let (:g) { Game.new }
-	
-	describe "#get_human_spot" do
-
-		it "should put a human spot in the board" do
-			g.get_human_spot
-			# g.stub!(:gets).and_return("3")
-			# g.stub(:get_human_spot).and_return("3")
-			# expect(g.board).to eq(["0", "1", "2", "O", "4", "5", "6", "7", "8"])
-			expect(g.board).to eq(["O", "1", "2", "3", "4", "5", "6", "7", "8"])
-		end
-
-	end
 
 	describe "#find_available_spaces" do
 		it "should find the available spaces" do
 			g.board = ["X", "X", "X", "3", "4", "5", "6", "7", "8"]
 			expect(g.find_available_spaces).to eq(%w[3 4 5 6 7 8])
+		end
+	end
+
+	describe "#generate_computer_move" do
+		it "should choose the center if the center is open (on the first move)" do
+			g.board = ["O", "1", "2", "3", "4", "5", "6", "7", "8"]
+			expect(g.generate_computer_move).to eq(4)
+		end
+	end
+
+	describe "#get_best_move" do
+		it "should win if possible (above)" do
+			g.board = ["0", "1", "2", "X", "4", "5", "X", "7", "8"]
+			expect(g.get_best_move(g.board)).to eq(0)
+		end
+		it "should win if possible (interior)" do
+			g.board = ["0", "1", "X", "3", "4", "5", "6", "7", "X"]
+			expect(g.get_best_move(g.board)).to eq(5)
+		end
+		it "should win if possible (below)" do
+			g.board = ["0", "X", "2", "3", "X", "5", "6", "7", "8"]
+			expect(g.get_best_move(g.board)).to eq(7)
+		end
+		it "should block human (above)" do
+			g.board = ["0", "1", "2", "O", "4", "5", "O", "7", "8"]
+			expect(g.get_best_move(g.board)).to eq(0)
+		end
+		it "should block human (interior)" do
+			g.board = ["0", "1", "O", "3", "4", "5", "6", "7", "O"]
+			expect(g.get_best_move(g.board)).to eq(5)
+		end
+		it "should block human (below)" do
+			g.board = ["0", "O", "2", "3", "O", "5", "6", "7", "8"]
+			expect(g.get_best_move(g.board)).to eq(7)
 		end
 	end
 

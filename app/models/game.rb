@@ -43,7 +43,7 @@ class Game
     board.select { |s| s != computer_mark && s != human_mark}    
   end
 
-  def get_best_move(board, next_player, depth = 0, best_score = {})
+  def get_best_move(board, depth = 0, best_score = {})
     available_spaces = find_available_spaces
 
     best_move = nil
