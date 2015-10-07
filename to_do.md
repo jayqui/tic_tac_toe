@@ -32,3 +32,4 @@
 
 ##### Portability desirable #####
 - DONE Make it less linked to the console ---> MVC architecture
+- anything else?
