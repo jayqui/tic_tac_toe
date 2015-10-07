@@ -6,7 +6,17 @@ class Game
     @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
     @computer_mark = "X"
     @human_mark = "O"
-    @winner = nil
+  end
+
+  def combinations
+    [ [board[0], board[1], board[2]],
+      [board[3], board[4], board[5]],
+      [board[6], board[7], board[8]],
+      [board[0], board[3], board[6]],
+      [board[1], board[4], board[7]],
+      [board[2], board[5], board[8]],
+      [board[0], board[4], board[8]],
+      [board[2], board[4], board[6]] ]
   end
 
   def get_human_spot
@@ -72,26 +82,15 @@ class Game
   end
 
   def someone_won
-    [board[0], board[1], board[2]].uniq.length == 1 ||
-    [board[3], board[4], board[5]].uniq.length == 1 ||
-    [board[6], board[7], board[8]].uniq.length == 1 ||
-    [board[0], board[3], board[6]].uniq.length == 1 ||
-    [board[1], board[4], board[7]].uniq.length == 1 ||
-    [board[2], board[5], board[8]].uniq.length == 1 ||
-    [board[0], board[4], board[8]].uniq.length == 1 ||
-    [board[2], board[4], board[6]].uniq.length == 1
+    combinations.any? {|comb| comb.uniq.length == 1}
   end
 
   def set_winner
     if someone_won
-      if [board[0], board[1], board[2]].uniq == [human_mark] || [board[3], board[4], board[5]].uniq == [human_mark] || [board[6], board[7], board[8]].uniq == [human_mark] || [board[0], board[3], board[6]].uniq == [human_mark] || [board[1], board[4], board[7]].uniq == [human_mark] || [board[2], board[5], board[8]].uniq == [human_mark] || [board[0], board[4], board[8]].uniq == [human_mark] || [board[2], board[4], board[6]].uniq == [human_mark]
-
+      if combinations.any? {|comb| comb.uniq == [human_mark]}
         @winner = human_mark
-
-      elsif [board[0], board[1], board[2]].uniq == [computer_mark] || [board[3], board[4], board[5]].uniq == [computer_mark] || [board[6], board[7], board[8]].uniq == [computer_mark] || [board[0], board[3], board[6]].uniq == [computer_mark] || [board[1], board[4], board[7]].uniq == [computer_mark] || [board[2], board[5], board[8]].uniq == [computer_mark] || [board[0], board[4], board[8]].uniq == [computer_mark] || [board[2], board[4], board[6]].uniq == [computer_mark]
-        
+      elsif combinations.any? {|comb| comb.uniq == [computer_mark]}        
         @winner = computer_mark
-
       end
     end
   end

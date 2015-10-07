@@ -35,6 +35,10 @@ describe "Game" do
 			g.board = ["X", "X", "X", "3", "4", "5", "6", "7", "8"]
 			expect(g.set_winner).to eq(g.computer_mark)
 		end
+		it "should not set a winner even if the board is full" do
+			g.board = ["O", "X", "O", "X", "O", "O", "X", "O", "X"]
+			expect(g.set_winner).to eq(nil)
+		end
 
 	end
 end
