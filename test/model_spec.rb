@@ -7,7 +7,7 @@ describe "Game" do
 	describe "#find_available_spaces" do
 		it "should find the available spaces" do
 			g.board = ["X", "X", "X", "3", "4", "5", "6", "7", "8"]
-			expect(g.find_available_spaces).to eq(%w[3 4 5 6 7 8])
+			expect(g.find_available_spaces(g.board)).to eq(%w[3 4 5 6 7 8])
 		end
 	end
 
