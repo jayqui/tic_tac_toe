@@ -15,4 +15,26 @@ describe "Game" do
 		end
 
 	end
+
+	describe "#someone_won" do
+		it "should return false if no one has won" do
+			expect(g.someone_won).to eq(false)
+		end		
+		it "should return true if someone has won" do
+			g.board = ["O", "O", "O", "3", "4", "5", "6", "7", "8"]
+			expect(g.someone_won).to eq(true)
+		end
+	end
+
+	describe "set_winner" do
+		it "should set the human as the winner if the human has won" do
+			g.board = ["O", "O", "O", "3", "4", "5", "6", "7", "8"]
+			expect(g.set_winner).to eq(g.human_mark)
+		end
+		it "should set the computer as the winner if the computer has won" do
+			g.board = ["X", "X", "X", "3", "4", "5", "6", "7", "8"]
+			expect(g.set_winner).to eq(g.computer_mark)
+		end
+
+	end
 end
