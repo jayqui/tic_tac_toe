@@ -15,6 +15,7 @@ describe "GameController" do
 			expect(not_0_thru_8('9')).to eq(true)
 		end
 	end
+	
 	describe "#acceptable_mark?" do
 		it "should reject '8'" do
 			expect(gc.acceptable_mark?('8')).to eq(false)
@@ -26,4 +27,26 @@ describe "GameController" do
 			expect(gc.acceptable_mark?("")).to eq(false)
 		end
 	end
+
+	describe "#acceptable_input?" do
+		it "should allow '8'" do
+			expect(gc.acceptable_input?('8')).to eq(true)
+		end
+		it "should reject '9'" do
+			expect(gc.acceptable_input?('9')).to eq(false)
+		end
+		it "should reject 'asdf'" do
+			expect(gc.acceptable_input?('asdf')).to eq(false)
+		end
+		it "doesn't allow taking a space occupied by the human" do
+			gc.game.board[8] = gc.game.human_mark
+			expect(gc.acceptable_input?('8')).to eq(false)
+		end
+		it "doesn't allow taking a space occupied by the computer" do
+			gc.game.board[0] = gc.game.computer_mark
+			expect(gc.acceptable_input?('0')).to eq(false)
+		end
+
+	end
+
 end

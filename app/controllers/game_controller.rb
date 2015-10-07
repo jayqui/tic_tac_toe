@@ -74,17 +74,19 @@ class GameController
 	end
 	
 	def acceptable_input?(input)
-		!not_0_thru_8(input) && !(board[input] == computer_mark) && !(board[input] == human_mark)
+		int = input.to_i
+		!not_0_thru_8(input) && !(board[int] == computer_mark) && !(board[int] == human_mark)
 	end
 	
-	def handle_bad_input(input)
-    if not_0_thru_8(input)
+	def handle_bad_input(num_string)
+		num = num_string.to_i
+    if not_0_thru_8(num_string)
     	view.error_must_be_0_8
     	display_and_prompt
-    elsif board[input] == computer_mark 
+    elsif board[num] == computer_mark 
     	view.error_already_chosen("computer")
     	display_and_prompt
-    elsif board[input] == human_mark
+    elsif board[num] == human_mark
     	view.error_already_chosen("human")
     	display_and_prompt
     end
@@ -96,13 +98,15 @@ class GameController
 	#########################################
 
 	def get_human_move
-    spot = gets.chomp.to_i
+    spot = gets.chomp
 	  until acceptable_input?(spot)
 	  	handle_bad_input(spot)
-	    spot = gets.chomp.to_i
+	    spot = gets.chomp
 	  end
-    board[spot] = human_mark
+	  num = spot.to_i
+    board[num] = human_mark
 	end
+
 	def display_and_prompt
 		view.display_board(game.board)
 		view.prompt_turn
@@ -117,10 +121,11 @@ class GameController
 	    if !someone_won && !tie
 	      move = game.generate_computer_move
 	      view.state_computer_move(move)
-		    display_and_prompt
+		    display_and_prompt unless someone_won
 	    end
 	  end
 	  game.set_winner
+		view.display_board(game.board)
 	  view.display_game_over(game.winner)
 	end
 
