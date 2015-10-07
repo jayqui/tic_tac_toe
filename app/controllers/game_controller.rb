@@ -17,7 +17,6 @@ class GameController
 
 	def introductions
 		view.welcome_message
-		view.introduce_characters("O","X")
 		view.introduce_gameplay
 		solicit_player_symbols
 	end
@@ -47,6 +46,18 @@ class GameController
 	def display_and_prompt
 		view.display_board(game.board)
 		view.prompt_turn
+	end
+
+	def get_human_move
+	  spot = nil
+	  until spot
+	    spot = gets.chomp.to_i
+	    if @board[spot] == computer_mark && @board[spot] != human_mark
+	      @board[spot] = @human_mark
+	    else
+	      spot = nil
+	    end
+	  end
 	end
 
 	def play_game

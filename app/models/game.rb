@@ -19,18 +19,6 @@ class Game
       [board[2], board[4], board[6]] ]
   end
 
-  def get_human_spot
-    spot = nil
-    until spot
-      spot = gets.chomp.to_i
-      if @board[spot] != computer_mark && @board[spot] != human_mark
-        @board[spot] = @human_mark
-      else
-        spot = nil
-      end
-    end
-  end
-
   def generate_computer_move
     spot = nil
 

@@ -5,13 +5,14 @@ X.  Check that the functionality is still present.
 X.  Write some tests.
 X.  Refactor wet code.
 -.  Refactor logical methods to improve on logical glitches
+-.  Tackle the sequential glitches.
 
 ##### Sequential glitches #####
-●  If I choose a place where the computer already has an X, it gets stuck.
-●  If I choose a place where the I've already put an O, it gets stuck.
-
 ● The game skips turns on bad user input (the first time).
 ● The game gets stuck after bad user input (after the first time)---even if user input is ok on the second time.
+
+●  If I choose a place where the computer already has an X, it gets stuck.
+●  If I choose a place where the I've already put an O, it gets stuck.
 
 
 ##### Logic glitch(es?) #####
