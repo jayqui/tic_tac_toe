@@ -10,13 +10,13 @@
 -  Refactor logical methods to improve on logical glitches
 
 ###Problems###
+##### Logic glitch(es?) #####
+- In its current form, which is supposed to be at a difficulty level of “hard” (meaning the computer cannot be beaten), it actually can be beaten in certain situations. This is more like a “medium” difficulty level.
 
 ##### Flexibility #####
 - Allow user to choose which player goes first.
+-> Allow the user to choose colors for both players.
 - DONE Allow the user to choose how each player marks the board (traditionally it’s “X” and “O”).
-
-##### Logic glitch(es?) #####
-- In its current form, which is supposed to be at a difficulty level of “hard” (meaning the computer cannot be beaten), it actually can be beaten in certain situations. This is more like a “medium” difficulty level.
 
 ##### UX desirables #####
 - DONE? The user messages are unclear. 

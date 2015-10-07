@@ -23,6 +23,7 @@ class Game
     spot = nil
 
     until spot
+      # prefer middle if empty
       if @board[4] == "4"
         spot = 4
         @board[spot] = @computer_mark
