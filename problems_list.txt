@@ -1,7 +1,9 @@
 ---Where to start?---
 X.  Segregeate files & methods into more of an MVC architecture, with runner file.
 X.  Rename some variables 
-3.  Check that the functionality is still present.
+X.  Check that the functionality is still present.
+-.  Write some tests.
+-.  Refactor wet code.
 
 
 
