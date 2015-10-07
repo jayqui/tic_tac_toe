@@ -24,13 +24,13 @@ class Game
 
     until spot
       # prefer middle if empty
-      if @board[4] == "4"
+      if board[4] == "4"
         spot = 4
-        @board[spot] = @computer_mark
+        board[spot] = computer_mark
       else
-        spot = get_best_move(@board, @computer_mark)
-        if @board[spot] != computer_mark && @board[spot] != human_mark
-          @board[spot] = @computer_mark
+        spot = get_best_move(board, computer_mark)
+        if board[spot] != computer_mark && board[spot] != human_mark
+          board[spot] = computer_mark
         else
           spot = nil
         end
@@ -43,30 +43,40 @@ class Game
     board.select { |s| s != computer_mark && s != human_mark}    
   end
 
-  def get_best_move(board, depth = 0, best_score = {})
-    available_spaces = find_available_spaces
+  def revert_to(original_board) # put back after simluating
+    self.board = original_board
+  end
 
+  def simulate_moves(available_spaces, depth = 0)
     best_move = nil
-    # for each available space, simulate computer going there and check for a win. If a win, that's best move. If none, thereafter simulate human going to each remaining space and check for a win. If a win, preventing it is the best move.  If none, just choose a random move.
+
+    original_board = board.dup
+
     available_spaces.each do |avail_space|
-      board[avail_space.to_i] = @computer_mark
+      as = avail_space.to_i
+      board[as] = computer_mark # simulating
       if someone_won
-        best_move = avail_space.to_i
-        board[avail_space.to_i] = avail_space # put back after simluating
+        best_move = as
+        revert_to(original_board)
         return best_move
       else
-        board[avail_space.to_i] = @human_mark
+        board[as] = human_mark # simulating
         if someone_won
-          best_move = avail_space.to_i
-          board[avail_space.to_i] = avail_space # put back after simluating
+          best_move = as
+          revert_to(original_board)
           return best_move
         else
-          board[avail_space.to_i] = avail_space # leave alone
+          board[as] = avail_space # leave alone
         end
       end
-
     end
+    return best_move
+  end
 
+  def get_best_move(board, depth = 0, best_score = {})
+    # For each available space, simulate computer going there and check for a win. If a win, that's best move. If none, thereafter simulate human going to each remaining space and check for a win. If a win, preventing it is the best move.  If none, just choose a random move.
+    available_spaces = find_available_spaces
+    best_move = simulate_moves(available_spaces)
     choose_best_move_or_random_move(best_move, available_spaces)
   end
 
