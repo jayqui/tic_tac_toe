@@ -1,4 +1,4 @@
-## Tic Tac Toe ## 
+##Tic Tac Toe##
 
 An exercise in refactoring non-ideal code.
 
