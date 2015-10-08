@@ -47,10 +47,15 @@ class Game
     self.board = original_board
   end
 
-  def declare_best_move_and_end_simulation(as, original_board)
-    best_move = as
+  def declare_best_move_and_end_simulation(player, as, original_board)
+    # best_move = as
     revert_to(original_board)
-    return best_move
+    # return best_move
+    if player == computer_mark
+      return {as => 100}
+    elsif player == human_mark
+      return {as => -100}
+    end
   end
 
   def other_player(current_player)
@@ -80,23 +85,33 @@ class Game
     end
   end
 
+  def simulate_move(space, current_player)
+
+  end
+
   def check_for_win_or_block(available_spaces, current_player, depth = 0)
     best_move = nil
     original_board = board.dup
 
     available_spaces.each do |avail_space|
       as = avail_space.to_i
-      board[as] = current_player # simulating
+
+      # simulate current_player in as
+      board[as] = current_player 
       if someone_won # base case #1: win
-        return declare_best_move_and_end_simulation(as, original_board) # win the game
+        return declare_best_move_and_end_simulation(current_player, as, original_board) # win the game
       else
-        board[as] = other_player(current_player) # simulating
-        if someone_won # base case #2: block immediate win
-          return declare_best_move_and_end_simulation(as, original_board) # block human from winning
-        else
-          board[as] = avail_space # leave alone
-        end
+        board[as] = avail_space # leave alone
       end
+
+      # simulate other_player in as
+      board[as] = other_player(current_player)
+      if someone_won # base case #1: win
+        return declare_best_move_and_end_simulation(other_player(current_player), as, original_board) # win the game
+      else
+        board[as] = avail_space # leave alone
+      end
+
     end
     return best_move
   end
