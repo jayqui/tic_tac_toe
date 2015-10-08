@@ -72,6 +72,14 @@ class Game
     end
   end
 
+  def simulate_and_score_outcomes(current_player, depth = 0)
+    available_spaces = find_available_spaces(board)
+    while depth > 0
+      guess_some_squares(current_player, 1)
+      check_for_win_or_block(available_spaces, current_player)
+    end
+  end
+
   def check_for_win_or_block(available_spaces, current_player, depth = 0)
     best_move = nil
     original_board = board.dup
