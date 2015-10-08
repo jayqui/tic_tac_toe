@@ -48,14 +48,14 @@ class Game
   end
 
   def declare_best_move_and_end_simulation(player, as, original_board)
-    # best_move = as
+    best_move = as
     revert_to(original_board)
-    # return best_move
-    if player == computer_mark
-      return {as => 100}
-    elsif player == human_mark
-      return {as => -100}
-    end
+    return best_move
+    # if player == computer_mark
+    #   return {as => 100}
+    # elsif player == human_mark
+    #   return {as => -100}
+    # end
   end
 
   def other_player(current_player)

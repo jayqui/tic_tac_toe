@@ -21,27 +21,27 @@ describe "Game" do
 	describe "#get_best_move" do
 		it "should find win if possible (above)" do
 			g.board = ["0", "1", "2", "X", "4", "5", "X", "7", "8"]
-			expect(g.get_best_move(g.board, g.computer_mark)).to eq({0 => 100})
+			expect(g.get_best_move(g.board, g.computer_mark)).to eq(0)
 		end
 		it "should find win if possible (interior)" do
 			g.board = ["0", "1", "X", "3", "4", "5", "6", "7", "X"]
-			expect(g.get_best_move(g.board, g.computer_mark)).to eq({5 => 100})
+			expect(g.get_best_move(g.board, g.computer_mark)).to eq(5)
 		end
 		it "should find win if possible (below)" do
 			g.board = ["0", "X", "2", "3", "X", "5", "6", "7", "8"]
-			expect(g.get_best_move(g.board, g.computer_mark)).to eq({7 => 100})
+			expect(g.get_best_move(g.board, g.computer_mark)).to eq(7)
 		end
 		it "should find human win threat if present (above)" do
 			g.board = ["0", "1", "2", "O", "4", "5", "O", "7", "8"]
-			expect(g.get_best_move(g.board, g.computer_mark)).to eq({0 => -100})
+			expect(g.get_best_move(g.board, g.computer_mark)).to eq(0)
 		end
 		it "should find human win threat if present (interior)" do
 			g.board = ["0", "1", "O", "3", "4", "5", "6", "7", "O"]
-			expect(g.get_best_move(g.board, g.computer_mark)).to eq({5 => -100})
+			expect(g.get_best_move(g.board, g.computer_mark)).to eq(5)
 		end
 		it "should find human win threat if present (below)" do
 			g.board = ["0", "O", "2", "3", "O", "5", "6", "7", "8"]
-			expect(g.get_best_move(g.board, g.computer_mark)).to eq({7 => -100})
+			expect(g.get_best_move(g.board, g.computer_mark)).to eq(7)
 		end
 	end
 
