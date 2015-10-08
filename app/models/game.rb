@@ -47,28 +47,27 @@ class Game
     self.board = original_board
   end
 
-  def simulate_moves(available_spaces, depth = 0)
-    best_move = nil
+  def declare_best_move_and_end_simulation(as, original_board)
+    best_move = as
+    revert_to(original_board)
+    return best_move
+  end
 
+  def check_for_win_or_block(available_spaces, depth = 0)
+    best_move = nil
     original_board = board.dup
 
     available_spaces.each do |avail_space|
       as = avail_space.to_i
       board[as] = computer_mark # simulating
-      if someone_won # base case #1
-        best_move = as # win the game
-        revert_to(original_board)
-        return best_move
+      if someone_won # base case #1: win
+        return declare_best_move_and_end_simulation(as, original_board) # win the game
       else
         board[as] = human_mark # simulating
-        if someone_won # base case #2
-          best_move = as # block human from winning
-          revert_to(original_board)
-          return best_move
+        if someone_won # base case #2: block immediate win
+          return declare_best_move_and_end_simulation(as, original_board) # block human from winning
         else
           board[as] = avail_space # leave alone
-          # available_spaces = find_available_spaces(board)
-          # simulate_moves(available_spaces)
         end
       end
     end
@@ -78,7 +77,7 @@ class Game
   def get_best_move(board, depth = 0, best_score = {})
     # For each available space, simulate computer going there and check for a win. If a win, that's best move. If none, thereafter simulate human going to each remaining space and check for a win. If a win, preventing it is the best move.  If none, just choose a random move.
     available_spaces = find_available_spaces(board)
-    best_move = simulate_moves(available_spaces)
+    best_move = check_for_win_or_block(available_spaces)
     choose_best_move_or_random_move(best_move, available_spaces)
   end
 
