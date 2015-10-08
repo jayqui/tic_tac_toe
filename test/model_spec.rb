@@ -18,6 +18,24 @@ describe "Game" do
 		end
 	end
 
+	describe "#check_for_win_or_block" do
+		it "should return nil if there is no win or block" do
+			g.board = ["O", "1", "2", "3", "4", "5", "6", "7", "8"]
+			available_spaces = g.find_available_spaces(g.board)
+			expect(g.check_for_win_or_block(available_spaces, g.computer_mark)).to eq(nil)
+		end
+		it "should return the square at which there's a win" do
+			g.board = ["0", "X", "2", "3", "X", "5", "6", "7", "8"]
+			available_spaces = g.find_available_spaces(g.board)
+			expect(g.check_for_win_or_block(available_spaces, g.computer_mark)).to eq(7)
+		end
+		it "should return the square at which it must block" do
+			g.board = ["0", "1", "O", "3", "4", "5", "6", "7", "O"]
+			available_spaces = g.find_available_spaces(g.board)
+			expect(g.check_for_win_or_block(available_spaces, g.computer_mark)).to eq(5)
+		end
+	end
+
 	describe "#get_best_move" do
 		it "should find win if possible (above)" do
 			g.board = ["0", "1", "2", "X", "4", "5", "X", "7", "8"]

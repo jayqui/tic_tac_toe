@@ -51,11 +51,6 @@ class Game
     best_move = as
     revert_to(original_board)
     return best_move
-    # if player == computer_mark
-    #   return {as => 100}
-    # elsif player == human_mark
-    #   return {as => -100}
-    # end
   end
 
   def other_player(current_player)
@@ -85,9 +80,9 @@ class Game
     end
   end
 
-  def simulate_move(space, current_player)
+  # def simulate_move(space, current_player)
 
-  end
+  # end
 
   def check_for_win_or_block(available_spaces, current_player, depth = 0)
     best_move = nil
@@ -115,6 +110,16 @@ class Game
     end
     return best_move
   end
+
+  # def check_outcomes_for_scores(available_spaces, current_player, depth = 0)
+  #   original_board = board.dup
+
+  #   guess_some_squares(current_player, 1)
+  #   available_spaces.each do |avail_space|
+  #     as = avail_space.to_i
+      
+  #   end
+  # end
 
   def get_best_move(board, current_player, depth = 0, best_score = {})
     # For each available space, simulate computer going there and check for a win. If a win, that's best move. If none, thereafter simulate human going to each remaining space and check for a win. If a win, preventing it is the best move.  If none, just choose a random move.
