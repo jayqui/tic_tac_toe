@@ -61,6 +61,17 @@ class Game
     end
   end
 
+  def guess_some_squares(current_player, depth = 0)
+    available_spaces = find_available_spaces(board)
+    while depth > 0
+      space = available_spaces[0]
+      board[space.to_i] = current_player
+      current_player = other_player(current_player)
+      available_spaces = find_available_spaces(board)
+      depth -= 1
+    end
+  end
+
   def check_for_win_or_block(available_spaces, current_player, depth = 0)
     best_move = nil
     original_board = board.dup
