@@ -36,6 +36,21 @@ describe "Game" do
 		end
 	end
 
+	describe "#generate_scoring_table" do
+		it "should generate a scoring table" do
+			g.board = ["0", "1", "O", "3", "4", "5", "6", "7", "O"]
+			available_spaces = g.find_available_spaces(g.board)
+			expect(g.generate_scoring_table(available_spaces)).to eq({"0"=>0, "1"=>0, "3"=>0, "4"=>0, "5"=>0, "6"=>0, "7"=>0})
+		end
+	end
+
+	describe "#check_outcomes_for_scores" do
+		it "should populate the scoring table" do
+			g.board = ["O","1","X","X","4","5","X","O","O"]
+			expect(g.check_outcomes_for_scores(g.computer_mark)).to eq({"1"=>0,"4"=>100,"5"=>0})
+		end
+	end
+
 	describe "#get_best_move" do
 		it "should find win if possible (above)" do
 			g.board = ["0", "1", "2", "X", "4", "5", "X", "7", "8"]

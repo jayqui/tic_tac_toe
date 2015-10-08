@@ -111,15 +111,47 @@ class Game
     return best_move
   end
 
-  # def check_outcomes_for_scores(available_spaces, current_player, depth = 0)
-  #   original_board = board.dup
+  def generate_scoring_table(available_spaces)
+    count = available_spaces.count
+    available_spaces.zip(Array.new(count, 0)).to_h
+  end
 
-  #   guess_some_squares(current_player, 1)
-  #   available_spaces.each do |avail_space|
-  #     as = avail_space.to_i
-      
-  #   end
-  # end
+  def check_outcomes_for_scores(current_player, depth = 0)
+    available_spaces = find_available_spaces(board)
+    scores = generate_scoring_table(available_spaces)
+    p "scores: #{scores}"
+
+    # guess_some_squares(current_player, 1)
+    available_spaces.each do |avail_space|
+      as = avail_space.to_i
+
+      # simulate current_player in as
+      board[as] = current_player 
+      if someone_won
+        p "scores[as.to_s].inspect: #{scores[as.to_s].inspect}"
+        p "scores[as.to_s].class: #{scores[as.to_s].class}"
+        scores[as.to_s] += 100
+        board[as] = avail_space # put it back
+        p "scores[as.to_s].inspect (after): #{scores[as.to_s].inspect}"
+        p "scores line 135: #{scores}"
+      else
+        # simulate other_player in as
+        board[as] = other_player(current_player)
+        if someone_won # base case #1: win
+          scores[as.to_s] += -100
+          board[as] = avail_space # put it back
+        else
+          board[as] = avail_space # leave alone
+        end
+      end
+
+      p "scores line 146: #{scores}"
+
+
+    end
+    p "scores line 150: #{scores}"
+    return scores
+  end
 
   def get_best_move(board, current_player, depth = 0, best_score = {})
     # For each available space, simulate computer going there and check for a win. If a win, that's best move. If none, thereafter simulate human going to each remaining space and check for a win. If a win, preventing it is the best move.  If none, just choose a random move.
