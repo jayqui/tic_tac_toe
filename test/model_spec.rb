@@ -56,6 +56,11 @@ describe "Game" do
 			g.guess_some_squares(g.computer_mark, 2)
 			expect(g.board).to eq(["X", "O", "X", "O", "O", "5", "6", "7", "8"])
 		end
+		it "should guess a third square" do
+			g.board = ["X", "O", "2", "3", "O", "5", "6", "7", "8"]
+			g.guess_some_squares(g.computer_mark, 3)
+			expect(g.board).to eq(["X", "O", "X", "O", "O", "X", "6", "7", "8"])
+		end
 	end
 
 	describe "#choose_best_move_or_random_move" do
