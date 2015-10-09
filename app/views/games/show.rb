@@ -103,11 +103,11 @@ class GameDisplay
 		print "         "
 
 		if winner && human_won
-			puts "Game Over!" + human_color(" The winner is #{winner}!")
+			puts human_color("Game Over! The winner is #{winner}!")
 		elsif winner && !human_won
-			puts "Game Over!" + computer_color(" The winner is #{winner}!")
+			puts computer_color("Game Over! The winner is #{winner}!")
 		else
-			puts yellow("\nGame Over! The result is a tie.")
+			puts yellow("Game Over! The result is a tie.")
 		end
 	
 		puts "||||||||||||||||||||||||||||||||||||||||||||||||||\n\n"
