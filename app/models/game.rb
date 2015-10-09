@@ -116,12 +116,10 @@ class Game
     available_spaces.zip(Array.new(count, 0)).to_h
   end
 
-  def check_outcomes_for_scores(current_player, depth = 0)
+  def check_outcomes_for_scores(current_player, scores = nil, depth = 1)
     available_spaces = find_available_spaces(board)
-    scores = generate_scoring_table(available_spaces)
-    p "scores: #{scores}"
+    scores ||= generate_scoring_table(available_spaces)
 
-    # guess_some_squares(current_player, 1)
     available_spaces.each do |avail_space|
       as = avail_space.to_i
 
@@ -141,6 +139,24 @@ class Game
         end
       end
     end
+    return scores
+  end
+
+  def simulate_for_scores(current_player, depth = 1, scores = nil)
+    available_spaces = find_available_spaces(board)
+    scores ||= generate_scoring_table(available_spaces)
+
+    while depth > 0
+      
+      # p "board (before sim): #{board}"
+      guess_some_squares(current_player, 1)
+      # p "board (after sim): #{board}"
+
+      scores = check_outcomes_for_scores(current_player, scores)
+      depth -= 1
+      current_player = other_player(current_player)
+    end
+    # p "scores: #{scores}"
     return scores
   end
 
