@@ -14,9 +14,9 @@
 - In its current form, which is supposed to be at a difficulty level of “hard” (meaning the computer cannot be beaten), it actually can be beaten in certain situations. This is more like a “medium” difficulty level.
 
 ##### Flexibility #####
-- Allow user to choose which player goes first.
--> Allow the user to choose colors for both players.
+- DONE Allow user to choose which player goes first.
 - DONE Allow the user to choose how each player marks the board (traditionally it’s “X” and “O”).
+-> Allow the user to choose colors for both players.
 
 ##### UX desirables #####
 - DONE? The user messages are unclear. 
@@ -32,4 +32,3 @@
 
 ##### Portability desirable #####
 - DONE Make it less linked to the console ---> MVC architecture
-- anything else?

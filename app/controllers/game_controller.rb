@@ -19,6 +19,7 @@ class GameController
 		view.welcome_message
 		view.introduce_gameplay
 		solicit_player_symbols
+		assign_starting_player
 	end
 
 	def get_human_symbol
@@ -46,6 +47,29 @@ class GameController
 	def solicit_player_symbols
 		h = get_human_symbol
 		get_computer_symbol(h)
+	end
+
+	def ask_who_should_start
+		view.ask_who_should_start
+		gets.chomp
+	end
+
+	def interpret_starting_player(who)
+		if who == computer_mark
+			@starting_player = computer_mark
+		elsif who == human_mark
+			@starting_player = human_mark
+		end
+	end
+
+	def assign_starting_player
+		who = ask_who_should_start
+		interpret_starting_player(who)
+		until who == computer_mark || who == human_mark
+			view.bad_input
+			who = ask_who_should_start
+			interpret_starting_player(who)
+		end
 	end
 
 	### ERROR HANDLING ###
@@ -79,6 +103,10 @@ class GameController
     end
 	end
 
+	def handle_unclear_starting_player
+
+	end
+
 
 	#########################################
 	############ MAIN GAME LOGIC ############
@@ -99,16 +127,24 @@ class GameController
 		view.prompt_turn
 	end
 
+	def generate_and_report_computer_move
+		move = game.generate_computer_move
+		view.state_computer_move(move)
+	end
+
 	def play_game
 		introductions
-		display_and_prompt
+		view.clear_screen
+
+		if @starting_player == computer_mark
+			generate_and_report_computer_move
+		end
 
 	  until someone_won || tie
+			display_and_prompt
 	    get_human_move
 	    if !someone_won && !tie
-	      move = game.generate_computer_move
-	      view.state_computer_move(move)
-		    display_and_prompt unless someone_won
+	    	generate_and_report_computer_move
 	    end
 	  end
 	  game.set_winner

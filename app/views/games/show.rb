@@ -4,7 +4,7 @@ class GameDisplay
 
 	# INTRODUCTIONS
 	def welcome_message
-		print %x{clear}
+		clear_screen
 		puts "||||||||||||||||||||||||||||||||||||||||||||||||||"
 		puts "|||||||| Welcome to my Tic Tac Toe game ||||||||||"
 		puts "||||||||||||||||||||||||||||||||||||||||||||||||||\n\n"
@@ -20,6 +20,14 @@ class GameDisplay
 
 	def solicit_computer_symbol
 		print "Enter the symbol you want to represent the computer: "
+	end
+
+	def ask_who_should_start
+		print "Which player should move first? "
+	end
+
+	def clear_screen
+		print %x{clear}
 	end
 
 	# ERROR MESSAGES
