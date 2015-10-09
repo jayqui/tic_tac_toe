@@ -23,9 +23,8 @@ class Game
     spot = nil
 
     until spot
-      # prefer middle if empty
       if board[4] == "4"
-        spot = 4
+        spot = 4 # prefer middle if empty
         board[spot] = computer_mark
       else
         spot = get_best_move(board, computer_mark)
@@ -109,4 +108,3 @@ class Game
   end
 
 end
-
