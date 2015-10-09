@@ -61,22 +61,33 @@ class GameDisplay
 	end
 
 
-	# DISLPAY FOR GAMEPLAY
-	def prompt_turn
-		print "\nPlease select your spot: "
+	# COLORATION
+	def human_color(text)
+		green(text)
+	end
+
+	def computer_color(text)
+		red(text)
 	end
 
 	def colorize_board(board, human_mark, comp_mark)
 		board.map do |square|
 			if square == human_mark
-				green(square)
+				human_color(square)
 			elsif square == comp_mark
-				red(square)
+				computer_color(square)
 			else
 				square
 			end
 		end
 	end
+
+
+	# DISLPAY FOR GAMEPLAY
+	def prompt_turn
+		print "\nPlease select your spot: "
+	end
+
 
 	def display_board(board, human_mark, comp_mark)
 		b = colorize_board(board, human_mark, comp_mark)
@@ -87,12 +98,19 @@ class GameDisplay
 		puts "The computer chose: #{move}"
 	end
 
-	def display_game_over(winner)
-		if winner
-			puts "\nGame Over! The winner is #{winner}!"
+	def display_game_over(winner, human_won)
+		puts "\n\n||||||||||||||||||||||||||||||||||||||||||||||||||"
+		print "         "
+
+		if winner && human_won
+			puts "Game Over!" + human_color(" The winner is #{winner}!")
+		elsif winner && !human_won
+			puts "Game Over!" + computer_color(" The winner is #{winner}!")
 		else
-			puts "\nGame Over! The result is a tie."
+			puts yellow("\nGame Over! The result is a tie.")
 		end
+	
+		puts "||||||||||||||||||||||||||||||||||||||||||||||||||\n\n"
 	end
 
 end

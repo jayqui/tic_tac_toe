@@ -149,7 +149,8 @@ class GameController
 	  end
 	  game.set_winner
 		view.display_board(game.board, human_mark, computer_mark)
-	  view.display_game_over(game.winner)
+	  
+	  view.display_game_over(game.winner, game.winner == human_mark)
 	end
 
 end
