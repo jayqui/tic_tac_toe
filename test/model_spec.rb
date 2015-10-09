@@ -49,6 +49,10 @@ describe "Game" do
 			g.board = ["O","1","X","X","4","5","X","O","O"]
 			expect(g.check_outcomes_for_scores(g.computer_mark)).to eq({"1"=>0,"4"=>100,"5"=>0})
 		end
+		it "rates a win positively even if it is also a block" do
+			g.board = %w[O 1 2 3 X X O 7 8]
+			expect(g.check_outcomes_for_scores(g.computer_mark)).to eq({"1"=>0,"2"=>0,"3"=>100, "7"=>0,"8"=>0})
+		end
 	end
 
 	describe "#get_best_move" do

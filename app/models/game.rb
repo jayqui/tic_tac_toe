@@ -128,12 +128,8 @@ class Game
       # simulate current_player in as
       board[as] = current_player 
       if someone_won
-        p "scores[as.to_s].inspect: #{scores[as.to_s].inspect}"
-        p "scores[as.to_s].class: #{scores[as.to_s].class}"
         scores[as.to_s] += 100
         board[as] = avail_space # put it back
-        p "scores[as.to_s].inspect (after): #{scores[as.to_s].inspect}"
-        p "scores line 135: #{scores}"
       else
         # simulate other_player in as
         board[as] = other_player(current_player)
@@ -144,12 +140,7 @@ class Game
           board[as] = avail_space # leave alone
         end
       end
-
-      p "scores line 146: #{scores}"
-
-
     end
-    p "scores line 150: #{scores}"
     return scores
   end
 
