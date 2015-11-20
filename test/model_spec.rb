@@ -11,9 +11,33 @@ describe "Game" do
 	end
 
 	describe "#generate_computer_move" do
-		it "should choose the center if the center is open (on the first move)" do
-			g.board = %w[O 1 2 3 4 5 6 7 8]
-			expect(g.generate_computer_move).to eq(4)
+		context "with an empty board" do
+			it "should choose the center" do
+				g.board = %w[0 1 2 3 4 5 6 7 8]
+				expect(g.generate_computer_move).to eq(4)
+			end
+		end
+		# it "should choose always a corner if the human has started in the middle" do
+		# 	10.times do
+		# 		g.board = %w[0 1 2 3 O 5 6 7 8]
+		# 		expect(g.generate_computer_move).to eq(0).or eq(2).or eq(6).or eq(8)
+		# 	end
+		# end
+		context "when win is one move away" do
+			it "should win" do
+				10.times do
+					g.board = %w[O 1 X X 4 5 X O O]
+					expect(g.generate_computer_move).to eq(4)
+				end
+			end
+		end
+		context "when block is one move away" do
+			it "should block" do
+				10.times do
+					g.board = %w[O X X X 4 5 X O O]
+					expect(g.generate_computer_move).to eq(4)
+				end
+			end
 		end
 	end
 
