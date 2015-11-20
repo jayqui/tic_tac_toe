@@ -3,7 +3,7 @@ class Game
   attr_accessor :board, :human_mark, :computer_mark, :winner
 
   def initialize
-    @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
+    @board = %w[0 1 2 3 4 5 6 7 8]
     @computer_mark = "X"
     @human_mark = "O"
   end
