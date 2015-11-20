@@ -1,3 +1,5 @@
+require_relative "game_state"
+
 class BestMoveCalculator
 	attr_accessor :board, :computer_mark, :human_mark
 
@@ -15,33 +17,12 @@ class BestMoveCalculator
 		available_spaces.map do |as|
 			possible_board = board.dup
 			possible_board[as.to_i] = "X"
-			possible_board
+			GameState.new(possible_board)
 		end
 	end
 
-	def win?(piece)
-		combinations.any? { |comb| comb.uniq == [piece] }
-	end
+	def rate_prospective_game_states
 
-	def loss?(piece)
-		combinations.any? { |comb| comb.uniq == [other_piece(piece)] }
-	end
-
-	private
-
-	def other_piece(piece)
-		piece == computer_mark ? human_mark : computer_mark
-	end
-
-	def combinations
-	  [ [board[0], board[1], board[2]],
-	    [board[3], board[4], board[5]],
-	    [board[6], board[7], board[8]],
-	    [board[0], board[3], board[6]],
-	    [board[1], board[4], board[7]],
-	    [board[2], board[5], board[8]],
-	    [board[0], board[4], board[8]],
-	    [board[2], board[4], board[6]] ]
-	end
+	end	
 
 end
