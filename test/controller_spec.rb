@@ -1,4 +1,3 @@
-require "rspec"
 require_relative "../app/models/game"
 require_relative "../app/views/games/show"
 require_relative "../app/helpers/helpers"
@@ -13,15 +12,6 @@ describe "GameController" do
 	# 		expect(g.board).to eq(["O", "1", "2", "3", "4", "5", "6", "7", "8"])
 	# 	end
 	# end
-
-	describe "#not_0_thru_8" do
-		it "returns false for '8'" do
-			expect(not_0_thru_8('8')).to eq(false)
-		end
-		it "returns true for '9'" do
-			expect(not_0_thru_8('9')).to eq(true)
-		end
-	end
 	
 	describe "#acceptable_mark?" do
 		it "should reject '8'" do
