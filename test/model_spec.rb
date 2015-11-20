@@ -18,29 +18,34 @@ describe "Game" do
 	end
 
 	describe "#get_best_move" do
-		it "should win if possible (above)" do
-			g.board = %w[0 1 2 X 4 5 X 7 8]
-			expect(g.get_best_move(g.board)).to eq(0)
+		context "when it can win" do
+			it "wins on top row" do
+				g.board = %w[0 1 2 X 4 5 X 7 8]
+				expect(g.get_best_move(g.board)).to eq(0)
+			end
+			it "wins on middle row" do
+				g.board = %w[0 1 X 3 4 5 6 7 X]
+				expect(g.get_best_move(g.board)).to eq(5)
+			end
+			it "wins on bottom row" do
+				g.board = %w[0 X 2 3 X 5 6 7 8]
+				expect(g.get_best_move(g.board)).to eq(7)
+			end
 		end
-		it "should win if possible (interior)" do
-			g.board = %w[0 1 X 3 4 5 6 7 X]
-			expect(g.get_best_move(g.board)).to eq(5)
-		end
-		it "should win if possible (below)" do
-			g.board = %w[0 X 2 3 X 5 6 7 8]
-			expect(g.get_best_move(g.board)).to eq(7)
-		end
-		it "should block human (above)" do
-			g.board = %w[0 1 2 O 4 5 O 7 8]
-			expect(g.get_best_move(g.board)).to eq(0)
-		end
-		it "should block human (interior)" do
-			g.board = %w[0 1 O 3 4 5 6 7 O]
-			expect(g.get_best_move(g.board)).to eq(5)
-		end
-		it "should block human (below)" do
-			g.board = %w[0 O 2 3 O 5 6 7 8]
-			expect(g.get_best_move(g.board)).to eq(7)
+
+		context "when it can block immediate human win" do
+			it "should block human on top row" do
+				g.board = %w[0 1 2 O 4 5 O 7 8]
+				expect(g.get_best_move(g.board)).to eq(0)
+			end
+			it "should block human on middle row" do
+				g.board = %w[0 1 O 3 4 5 6 7 O]
+				expect(g.get_best_move(g.board)).to eq(5)
+			end
+			it "should block human on bottom row" do
+				g.board = %w[0 O 2 3 O 5 6 7 8]
+				expect(g.get_best_move(g.board)).to eq(7)
+			end
 		end
 	end
 
