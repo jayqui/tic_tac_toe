@@ -211,7 +211,7 @@ describe "GameState" do
 		end
 		context "board with seven openings" do
 			it "has seven successors" do
-				gs = GameState.new(board: %w[X O 2 3 4 5 6 7 8])
+				gs = GameState.new(board: %w[0 X 2 3 O 5 6 7 8])
 				expect(gs.find_successors.count).to eq(7)
 			end
 		end
