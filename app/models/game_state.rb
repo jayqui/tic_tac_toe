@@ -16,24 +16,20 @@ class GameState
 		available_spaces.map do |as|
 			possible_board = board.dup
 			possible_board[as.to_i] = player
-			GameState.new(board: possible_board)
+			GameState.new(board: possible_board, current_player: other_player)
 		end
-	end
-
-	def successors_tree
-
 	end
 
 	def available_spaces
 		board.select { |s| s != computer_mark && s != human_mark} 
 	end
 
-	def win?(piece)
-		combinations.any? { |comb| comb.uniq == [piece] }
+	def win?(player)
+		combinations.any? { |comb| comb.uniq == [player] }
 	end
 
-	def loss?(piece)
-		combinations.any? { |comb| comb.uniq == [other_piece(piece)] }
+	def loss?(player)
+		combinations.any? { |comb| comb.uniq == [other_player] }
 	end
 
 	def draw?
@@ -46,8 +42,8 @@ class GameState
 
 	private
 
-	def other_piece(piece)
-		piece == computer_mark ? human_mark : computer_mark
+	def other_player
+		current_player == computer_mark ? human_mark : computer_mark
 	end
 
 	def combinations

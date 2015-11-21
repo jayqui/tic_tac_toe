@@ -15,7 +15,7 @@ describe "GameState" do
 	# 												     O 4 O 
 	# 												     O X 8])
 	# p "gs.inspect: #{gs.inspect}"
-	
+
 
 	describe "#win?" do
 		it "should correctly identify a win" do
@@ -101,6 +101,12 @@ describe "GameState" do
 			end
 			it "should yield a tree" do
 				expect(gs.successors.last.successors.first).to be_a(GameState)
+			end
+			it "a *correct* tree" do
+				expect(gs.successors.last.successors.first.board).to eq(
+						%w[X X O 
+							 O O O 
+							 O X X])
 			end
 			it "that terminates at end states" do
 				expect(gs.successors.first.successors).to eq([])
