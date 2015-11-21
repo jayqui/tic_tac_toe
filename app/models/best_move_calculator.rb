@@ -19,7 +19,7 @@ class BestMoveCalculator
 		available_spaces.map do |as|
 			possible_board = board.dup
 			possible_board[as.to_i] = player
-			GameState.new(possible_board)
+			GameState.new(board: possible_board)
 		end
 	end
 
@@ -46,7 +46,7 @@ class BestMoveCalculator
 	def rate_outcomes
 		return outcomes_table if game_over?
 
-		
+
 
 	end
 

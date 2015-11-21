@@ -1,10 +1,27 @@
 class GameState
-	attr_accessor :board, :computer_mark, :human_mark
+	attr_accessor :board, :computer_mark, :human_mark, :current_player, :successors, :score
 
-	def initialize(board = %w[0 1 2 3 4 5 6 7 8])
-		@board = board
-		@computer_mark = "X"
-		@human_mark = "O"
+	def initialize(args = {})
+		args[:board] ? @board = args[:board] : @board = %w[X X O O 4 O O X 8]
+		args[:computer_mark] ? @computer_mark = args[:computer_mark] : @computer_mark = "X"
+		args[:computer_mark] ? @computer_mark = args[:computer_mark] : @computer_mark = "X"
+		args[:human_mark] ? @human_mark = args[:human_mark] : @human_mark = "O"
+		args[:current_player] ? @current_player = args[:current_player] : @current_player = @computer_mark
+		@score = nil
+		@successors = find_successors
+	end
+
+	def find_successors(player = current_player)
+		return [] if end_state?
+		available_spaces.map do |as|
+			possible_board = board.dup
+			possible_board[as.to_i] = player
+			GameState.new(board: possible_board)
+		end
+	end
+
+	def successors_tree
+
 	end
 
 	def available_spaces
