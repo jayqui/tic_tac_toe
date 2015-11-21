@@ -195,13 +195,30 @@ describe "GameState" do
 				])
 			end
 		end
+
+		# TESTING TIME TO EXECUTION
 		context "empty board" do
 			it "has nine successors" do
 				gs = GameState.new(board: %w[0 1 2 3 4 5 6 7 8])
-				gs.successors.each do |s|
-					p s
-				end
 				expect(gs.find_successors.count).to eq(9)
+			end
+		end
+		xcontext "board with eight openings" do
+			it "has eight successors" do
+				gs = GameState.new(board: %w[X 1 2 3 4 5 6 7 8])
+				expect(gs.find_successors.count).to eq(8)
+			end
+		end
+		xcontext "board with seven openings" do
+			it "has seven successors" do
+				gs = GameState.new(board: %w[X O 2 3 4 5 6 7 8])
+				expect(gs.find_successors.count).to eq(7)
+			end
+		end
+		xcontext "board with five openings" do
+			it "has five successors" do
+				gs = GameState.new(board: %w[X O X O 4 5 6 7 8])
+				expect(gs.find_successors.count).to eq(5)
 			end
 		end
 
