@@ -32,6 +32,16 @@ class GameState
 		end
 	end
 
+	def find_scores_of_successors
+		successors.map do |succ| 
+			if succ.current_player == self.current_player
+				succ.score
+			else
+				succ.score * -1 if succ.score
+			end
+		end
+	end
+
 	def available_spaces
 		board.select { |s| s != computer_mark && s != human_mark} 
 	end

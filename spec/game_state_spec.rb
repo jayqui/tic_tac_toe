@@ -3,6 +3,12 @@ require_relative "../app/models/game_state"
 describe "GameState" do
 
 	let(:gs) { GameState.new }
+	let(:g48) { GameState.new(board: %w[X X O 
+																			O 4 O 
+									  									O X 8]) }
+	let(:g3468) { GameState.new(board: %w[X O O 
+																				3 4 O 
+										  									6 X 8])}
 	let(:draw) { GameState.new(board: %w[O X O 
 									 										 X O X
 																			 X O X]) }
@@ -24,10 +30,7 @@ describe "GameState" do
 
 	describe "#loss?" do
 		it "should correctly idenitfy a loss" do
-			gs.board = %w[O O O 
-									 	X 4 X
-										X O X]
-			expect(gs.loss?("X")).to eq(true)
+			expect(loss.loss?("X")).to eq(true)
 		end
 		it "should correctly idenitfy a non-loss" do
 			gs.board = %w[O 1 O 
@@ -47,7 +50,7 @@ describe "GameState" do
 										O O X]
 			expect(gs.draw?).to eq(false)
 		end
-		it "should identify a win as a non-draw" do
+		it "no matter which player has won" do
 			gs.board = %w[O O O 
 									 	X O X
 										X O X]
@@ -56,22 +59,41 @@ describe "GameState" do
 	end
 
 	describe "#available_spaces" do
-
-		before(:each) do
-			gs.board = %w[X X O 
-										O 4 O 
-									  O X 8]
-		end
-
 		it "can find available spaces" do
-			expect(gs.available_spaces).to eq(%w[4 8])
+			expect(g48.available_spaces).to eq(%w[4 8])
 		end
 	end
 
 	describe "#find_successors" do
 		# see `find_successors_spec.rb`
 	end
+
+	describe "#find_score" do
+		it "should return 10 for a win" do
+			expect(win.score).to eq(10)
+		end
+		it "should return -10 for a loss" do
+			expect(loss.score).to eq(-10)
+		end
+		it "should return 0 for a draw" do
+			expect(draw.score).to eq(0)
+		end
+		it "should return nil for a non-end-state" do
+			gs.board = %w[X X O 
+										O 4 O 
+									  O X 8]
+			expect(gs.score).to eq(nil)
+		end
+	end
 	
+	describe "#find_scores_of_successors" do
+		it "should find the sucessors' scores for g48" do
+			expect(g48.find_scores_of_successors).to eq([10,nil])
+		end
+		it "should find the sucessors' scores for g3468" do
+			expect(g3468.find_scores_of_successors).to eq([nil,nil,nil,nil])
+		end
+	end
 
 		# TESTING TIME TO EXECUTION
 		# context "board with five openings" do
@@ -86,7 +108,7 @@ describe "GameState" do
 		# 		expect(gs.find_successors.count).to eq(6)
 		# 	end
 		# end
-		context "board with seven openings" do
+		xcontext "board with seven openings" do
 			it "has seven successors" do
 				gs = GameState.new(board: %w[0 X 2 3 O 5 6 7 8])
 				expect(gs.find_successors.count).to eq(7)
