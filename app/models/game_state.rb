@@ -37,7 +37,7 @@ class GameState
 	end
 
 	def end_state?
-		win?(computer_mark) || win?(human_mark) || draw?
+		win?(computer_mark) || win?(human_mark) || available_spaces.count == 0
 	end
 
 	private
