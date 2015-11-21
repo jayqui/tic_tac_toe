@@ -51,12 +51,12 @@ describe BestMoveCalculator do
 			end
 		end
 
-		describe "#rate_outcomes" do
+		describe "#outcomes_table" do
 			it "should be a hash" do
-				expect(bmc.rate_outcomes).to be_a(Hash)
+				expect(bmc.outcomes_table).to be_a(Hash)
 			end
 			it "whose values are the prospective outcomes" do
-				expect(bmc.rate_outcomes.values).to eq([10,nil])
+				expect(bmc.outcomes_table.values).to eq([10,nil])
 			end
 		end
 

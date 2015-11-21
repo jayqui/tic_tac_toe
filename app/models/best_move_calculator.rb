@@ -35,12 +35,19 @@ class BestMoveCalculator
 		end
 	end
 
-	def rate_outcomes(depth = 1)
+	def outcomes_table
 		prospective_next_board.zip(rate_prospective_game_states).to_h
 	end
 
 	def game_over?
-		rate_outcomes.values.uniq != [nil]
+		outcomes_table.values.uniq != [nil]
+	end
+
+	def rate_outcomes
+		return outcomes_table if game_over?
+
+		
+
 	end
 
 
