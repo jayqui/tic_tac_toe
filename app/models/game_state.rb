@@ -7,7 +7,7 @@ class GameState
 		args[:computer_mark] ? @computer_mark = args[:computer_mark] : @computer_mark = "X"
 		args[:human_mark] ? @human_mark = args[:human_mark] : @human_mark = "O"
 		args[:current_player] ? @current_player = args[:current_player] : @current_player = @computer_mark
-		@score = nil
+		@score = find_score
 		@successors = find_successors
 	end
 
@@ -19,6 +19,16 @@ class GameState
 			possible_board = board.dup
 			possible_board[as.to_i] = player
 			GameState.new(board: possible_board, current_player: other_player)
+		end
+	end
+
+	def find_score
+		if win?(current_player)
+			10
+		elsif loss?(current_player)
+			-10
+		elsif draw?
+			0
 		end
 	end
 
