@@ -30,4 +30,25 @@ describe "GameState" do
 		end
 	end
 
+	describe "#draw?" do
+		it "should correctly idenitfy a draw" do
+			gs.board = %w[O X O 
+									 	X O X
+										X O X]
+			expect(gs.draw?).to eq(true)
+		end
+		it "should identify a win as a non-draw" do
+			gs.board = %w[O X O 
+									 	X X X
+										O O X]
+			expect(gs.draw?).to eq(false)
+		end
+		it "should identify a win as a non-draw" do
+			gs.board = %w[O O O 
+									 	X O X
+										X O X]
+			expect(gs.draw?).to eq(false)
+		end
+	end
+
 end

@@ -19,6 +19,14 @@ class GameState
 		combinations.any? { |comb| comb.uniq == [other_piece(piece)] }
 	end
 
+	def draw?
+		available_spaces.count == 0 && !win?(computer_mark) && !win?(human_mark)
+	end
+
+	def end_state?
+		win?(computer_mark) || win?(human_mark) || draw?
+	end
+
 	private
 
 	def other_piece(piece)
