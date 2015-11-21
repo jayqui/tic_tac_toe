@@ -15,7 +15,7 @@ class BestMoveCalculator
 		board.select { |s| s != computer_mark && s != human_mark} 
 	end
 
-	def prospective_next_board(player = current_player)
+	def prospective_next_board(player = current_player, the_board = board)
 		available_spaces.map do |as|
 			possible_board = board.dup
 			possible_board[as.to_i] = player
@@ -31,11 +31,18 @@ class BestMoveCalculator
 				-10
 			elsif game_state.draw?
 				0
-			else
-				0
 			end
 		end
 	end
+
+	def rate_outcomes(depth = 1)
+		prospective_next_board.zip(rate_prospective_game_states).to_h
+	end
+
+	def game_over?
+		rate_outcomes.values.uniq != [nil]
+	end
+
 
 	private
 

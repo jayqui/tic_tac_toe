@@ -47,7 +47,37 @@ describe BestMoveCalculator do
 
 		describe "#rate_prospective_game_states" do
 			it "should rate the prospective game states" do
-				expect(bmc.rate_prospective_game_states).to eq([10,0])
+				expect(bmc.rate_prospective_game_states).to eq([10,nil])
+			end
+		end
+
+		describe "#rate_outcomes" do
+			it "should be a hash" do
+				expect(bmc.rate_outcomes).to be_a(Hash)
+			end
+			it "whose values are the prospective outcomes" do
+				expect(bmc.rate_outcomes.values).to eq([10,nil])
+			end
+		end
+
+		describe "#game_over?" do
+			it "should identify that there's an immediate end state" do
+				expect(bmc.game_over?).to eq(true)
+			end
+		end
+	end
+
+	context "for a board with no immediate end" do
+
+		before(:each) do
+			bmc.board = %w[X 1 2 
+										 O O X 
+										 X 7 8]
+		end
+
+		describe "#game_over?" do
+			it "identifies where there's no immediate end" do
+				expect(bmc.game_over?).to eq(false)
 			end
 		end
 
