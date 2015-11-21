@@ -12,8 +12,10 @@ class GameState
 	end
 
 	def find_successors(player = current_player)
+		asps = available_spaces
+		return [] if asps.count > 7 # limit long runtime
 		return [] if end_state?
-		available_spaces.map do |as|
+		asps.map do |as|
 			possible_board = board.dup
 			possible_board[as.to_i] = player
 			GameState.new(board: possible_board, current_player: other_player)
