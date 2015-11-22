@@ -93,6 +93,37 @@ describe "GameState" do
 		it "should find the sucessors' scores for g3468" do
 			expect(g3468.find_scores_of_successors).to eq([nil,nil,nil,nil])
 		end
+		context "it should give negative scores where appropriate" do
+			x = GameState.new(board: %w[O 1 O
+																	X X O
+																	X 7 8])
+			it "here are the successor boards of this game state" do
+				expect(x.successors.map{|s|s.board}).to eq([
+					%w[O X O
+						 X X O
+						 X 7 8],
+					%w[O 1 O
+						 X X O
+						 X X 8],
+					%w[O 1 O
+						 X X O
+						 X 7 X],
+					])
+			end
+			it "here are the second order successors, for the first tree branch" do
+				expect(x.successors.first.successors.map{|s|s.board}).to eq([
+					%w[O X O
+						 X X O
+						 X O 8],
+					%w[O X O
+						 X X O
+						 X 7 O],
+					])
+			end
+			it "gives negative scores where appropriate" do
+			expect(x.successors.first.find_scores_of_successors).to eq([nil,-10])
+			end
+		end
 	end
 
 		# TESTING TIME TO EXECUTION

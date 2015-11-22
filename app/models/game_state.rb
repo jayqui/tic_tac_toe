@@ -34,7 +34,7 @@ class GameState
 
 	def find_scores_of_successors
 		successors.map do |succ| 
-			if succ.current_player == self.current_player
+			if succ.current_player == computer_mark
 				succ.score
 			else
 				succ.score * -1 if succ.score
