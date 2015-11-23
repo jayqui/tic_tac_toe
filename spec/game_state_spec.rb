@@ -142,12 +142,12 @@ describe "GameState" do
 		end
 		it "g48 accurately inherits scores from successors" do
 			g48.inherit_score_from_successors
-			puts "g48: #{g48.inspect}"
+			# puts "g48: #{g48.inspect}"
 			expect(g48.score).to eq(-10)
 		end
 		it "g346 accurately inherits scores from successors" do
 			g346.inherit_score_from_successors
-			puts "g346: #{g346.inspect}"
+			# puts "g346: #{g346.inspect}"
 			expect(g346.score).to eq(0)
 		end
 		it "g3468 accurately inherits scores from successors" do
