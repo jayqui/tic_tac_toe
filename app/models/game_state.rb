@@ -4,7 +4,6 @@ class GameState
 	def initialize(args = {})
 		args[:board] ? @board = args[:board] : @board = %w[X X O O 4 O O X 8]
 		args[:computer_mark] ? @computer_mark = args[:computer_mark] : @computer_mark = "X"
-		args[:computer_mark] ? @computer_mark = args[:computer_mark] : @computer_mark = "X"
 		args[:human_mark] ? @human_mark = args[:human_mark] : @human_mark = "O"
 		args[:current_player] ? @current_player = args[:current_player] : @current_player = @computer_mark
 		@score = find_score
