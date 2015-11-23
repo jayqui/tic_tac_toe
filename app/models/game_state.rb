@@ -1,5 +1,5 @@
 class GameState
-	attr_accessor :board, :computer_mark, :human_mark, :current_player, :successors, :score
+	attr_accessor :board, :computer_mark, :human_mark, :current_player, :successors, :score, :choice, :choice_square
 
 	def initialize(args = {})
 		args[:board] ? @board = args[:board] : @board = %w[X X O O 4 O O X 8]
@@ -47,9 +47,13 @@ class GameState
 		if successor_scores.all?  # all successor scores are not nil
 			if player == computer_mark
 				self.score = successor_scores.max
+				@choice = successors.find {|s| s.score == self.score}
+				@choice_square = self.board - @choice.board
 				return self.score
 			else
 				self.score = successor_scores.min
+				@choice = successors.find {|s| s.score == self.score}
+				@choice_square = self.board - @choice.board
 				return self.score
 			end
 		else
@@ -57,6 +61,7 @@ class GameState
 				if successor.score == nil
 					self.score = successor.inherit_score_from_successors(other_player)
 					return self.score
+					# successor.inherit_score_from_successors(other_player)
 				end
 			end
 		end
