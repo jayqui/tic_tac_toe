@@ -3,12 +3,21 @@ require_relative "../app/models/game_state"
 describe "GameState" do
 
 	let(:gs) { GameState.new }
+	let(:g3)  { GameState.new(board: %w[O X O 
+																			3 O X 
+									  									X O X]) }
 	let(:g48) { GameState.new(board: %w[X X O 
 																			O 4 O 
 									  									O X 8]) }
+	let(:g346)  { GameState.new(board: %w[O X O 
+																				3 4 X 
+										  									6 O X])}
 	let(:g3468) { GameState.new(board: %w[X O O 
 																				3 4 O 
 										  									6 X 8])}
+	let(:g23568) { GameState.new(board: %w[O O 2 
+																				 3 X 5 
+										  									 6 X 8])}
 	let(:draw) { GameState.new(board: %w[O X O 
 									 										 X O X
 																			 X O X]) }
@@ -123,6 +132,50 @@ describe "GameState" do
 			it "gives negative scores where appropriate" do
 			expect(x.successors.first.find_scores_of_successors).to eq([nil,-10])
 			end
+		end
+	end
+
+	describe "#inherit_score_from_successors" do
+		it "g3 accurately inherits scores from successors" do
+			g3.inherit_score_from_successors
+			expect(g3.score).to eq(0)
+		end
+		it "g48 accurately inherits scores from successors" do
+			g48.inherit_score_from_successors
+			expect(g48.score).to eq(-10)
+		end
+		it "g346 accurately inherits scores from successors" do
+			g346.inherit_score_from_successors
+			expect(g346.score).to eq(0)
+		end
+		it "g3468 accurately inherits scores from successors" do
+			g3468.inherit_score_from_successors
+			expect(g3468.score).to eq(-10)
+		end
+		it "g23568 accurately inherits scores from successors" do
+			g23568.inherit_score_from_successors
+			expect(g23568.score).to eq(0)
+		end
+
+		xit "g3 chooses the right move" do
+			g3.inherit_score_from_successors
+			expect(g3.choice).to eq(%w[3])
+		end
+		xit "g48 chooses the right move" do
+			g48.inherit_score_from_successors
+			expect(g48.choice).to eq(%w[8])
+		end
+		xit "g346 chooses the right move" do
+			g346.inherit_score_from_successors
+			expect(g346.choice).to eq("any")
+		end
+		xit "g3468 chooses the right move" do
+			g3468.inherit_score_from_successors
+			expect(g3468.choice).to eq("8 sorta but it doesn't matter")
+		end
+		xit "g23568 chooses the right move" do
+			g23568.inherit_score_from_successors
+			expect(g23568.choice).to eq(%w[2])
 		end
 	end
 
