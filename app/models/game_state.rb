@@ -42,6 +42,26 @@ class GameState
 		end
 	end
 
+	def inherit_score_from_successors(player = computer_mark)
+		successor_scores = find_scores_of_successors
+		if successor_scores.all?  # all successor scores are not nil
+			if player == computer_mark
+				self.score = successor_scores.max
+				return self.score
+			else
+				self.score = successor_scores.min
+				return self.score
+			end
+		else
+			successors.each do |successor|
+				if successor.score == nil
+					self.score = successor.inherit_score_from_successors(other_player)
+					return self.score
+				end
+			end
+		end
+	end
+
 	def available_spaces
 		board.select { |s| s != computer_mark && s != human_mark} 
 	end
